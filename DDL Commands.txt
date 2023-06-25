@@ -1,0 +1,79 @@
+-- How to create a databse:
+create database Rashid;
+ 
+-- How to select a particular databse:
+use rashid;
+
+-- How to creata a table:
+create table staff (sid int primary key, name varchar(25) not null, doj datetime not null, mail varchar(50), 
+contact varchar(13), Address varchar(35), constraint uk_contact unique key (contact));
+
+-- How to clone of a table:
+create table rashid.staff like org.staff;
+ 
+-- How to create atable:
+insert into staff values (101,'Rashid Aftab','2020-01-01 10:00:00','ras@yopmail.com','0987654312','Rishra'),
+(102,'Sayam Siddique','2021-04-01 10:00:00','sam@yopmail.com','1234567890','Konnagar'),
+(103,'Shahid Aftab','2020-02-01 10:00:00','shah@yopmail.com','9086754231','Rishra'),
+(104,'Kaifee Siddique','2021-03-01 10:00:00','kaif@yopmail.com','1423765980','Konnagar'),
+(105,'Mohsin Imam','2021-06-01 10:00:00','moh@yopmail.com','05678954321','Rishra'),
+(106,'Razy Siddique','2020-04-01 10:00:00','raz@yopmail.com','1982763540','Konnagar'),
+(107,'Noman Ali','2020-08-01 10:00:00','nom@yopmail.com','0192837465','Rishra'),
+(108,'Numair Siddique','2021-04-011 10:00:00','num@yopmail.com','9925564711','Konnagar');
+
+-- How to create a different table with foregin key:
+create table dept (Sid int, dept varchar(25) not null, salary decimal not null, bonus decimal, 
+constraint fk_id foreign key (sid) references staff (sid));
+
+-- How to insert data into a table:
+insert into dept values (101,'HR',37000,10000);
+insert into dept values(102,'Dev',45000,15000),(103,'Dev',48000,15000),(104,'Tester',38000,12000),
+(105,'Dev',35000,10000),(106,'Tester',28000,8000),(107,'Tester',35000,12000),(108,'Dev',28000,8000);
+
+-- How to raname a table:
+rename table staff to employee;
+or
+alter table staff rename employee;
+
+-- How to modify a data type of a column:
+alter table dept modify column salary int; 
+
+-- How to add a column:
+alter table employee add column Age int not null;
+or
+alter table employee add column Age int not null after address;
+
+-- How to rename a column:
+alter table employee rename column state to empstate;
+
+-- How to drop a primary key:
+alter table employee drop primary key;
+
+-- How to add a primary key:
+alter table employee add primary key(sid);
+
+-- How to add check constraint:
+alter table employee add constraint ck_age check(age>18);
+
+-- How to drop a check Constraint:
+alter table employee drop check ck_age;
+
+-- How to drop a column:
+alter table employee drop column mail;
+
+-- How to drop froeign key:
+alter table dept drop constraint fk_id;
+
+-- How to add foreign key 
+alter table dept add constraint fk_id foreign key (sid) references employee (sid);
+
+-- how to update a data in a particular record:
+update employee set name ="Sam Ali" where sid=102;
+
+-- How to trucate a table:
+truncate table employee;
+
+-- How to drop a table/database:
+drop table employee;
+drop database Rashid;
+
