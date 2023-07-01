@@ -1,0 +1,144 @@
+-- How to check current time, date;
+select now();
+select sysdate();
+select system_user();
+select current_time();
+select current_date();
+
+-- how to select a table; 
+select * from Rashid.employee;
+
+-- select columns from a table;
+select sid,Name,contact from employee;
+
+-- How to select Distnict record of a column;
+select distinct address from employee;
+
+-- how to count records of a column/table;
+select count(sid) from employee;
+
+-- count records of a column/table with where condition;
+select count(sid) from employee where address="Konnagar";
+
+-- count distinct records of a column;
+select count(distinct(Address)) from employee;
+
+-- order by desc;
+select * from employee order by doj desc;
+select * from employee order by sId desc limit 2;
+
+-- limit,
+select * from employee limit 3;
+
+-- order by with limit
+select * from employee order by sId desc limit 2;
+select name,doj from employee order by doj asc;
+
+
+-- limit for specific  position
+select * from employee limit 3,1;
+
+-- like operator to find someone name which contain "id" any where;
+select * from staff where name like "%id%";
+
+-- like operator to find someone name which contain "b" at the end;
+select * from employee where name like "%b";
+
+-- like operator to find someone name which contain "R" at the start;
+select * from employee where name like "R%";
+
+-- like operator to find someone name which contain "id" at 5(specific position) letter;
+select * from employee where name like "____id%";
+
+-- like operator to find someone name which not contain "id";
+select * from employee where name not like "%id%";
+
+-- like operator to find someone name which contain "id" anywhere with where condition;
+select * from employee where Address="konnagar" and name like "%id%";
+select * from employee where Address="konnagar" or name like "%id%";
+
+-- find all record which not contain specific record;
+select * from employee where not address="rishra";
+
+-- reterive name(contain how much letters) as alias  with where condition; 
+select Name,char_length(name) as length from employee where address="Rishra";
+
+-- find all name and replace A with @; 
+select name,replace(name,'a','@')as replaced from employee;
+
+-- retrive 3 rows details of 2 columns in desc;
+select name,doj from employee order by doj desc limit 3;
+
+--group by 
+select dept, count(sid)  from dept group by dept;
+select upper(Address) as Address from employee where sid='102';
+
+-- record in lower case;
+select lower(Name) as Name from employee where Address='Rishra';
+
+-- record in upper case with alias + condition;
+select concat(upper(Name), ' - ', Contact) as NamePhone from employee where sid=102;
+
+-- record position;
+select position("id" in Name) as CharIndex from employee where sid=102;
+
+-- repeat a rexord as many time;
+select repeat(Address, 3) as Address from employee where sid=105;
+
+-- reverse a column data;
+select reverse(Name) as ReverseWord from employee where sid=104;
+
+-- Right trim a  record;
+select rtrim(Name) as FirstName from employee where sid=102;
+
+-- substring;
+select substr(contact, 2, 5) as SubPhone from employee where sid=103;
+
+-- string compare;
+select strcmp(Name,Address) as Result from employee where sid=104;
+
+-- record in lower case with concat 
+select lower(concat(name, " " , Address)) as Details from employee where sid=102;
+
+-- show month;
+select month('2023-06-15');
+
+-- show month name;
+select monthname('2023-06-15');
+
+-- show week from a particular date
+select yearweek('2023-06-15');
+
+-- distinct column record  with limit;
+select distinct salary,dept from dept order by SALARY desc limit 5, 1;
+
+-- 
+select * from dept where salary > (select avg(SALARY) from dept);
+
+-- 
+select name, doj, timestampdiff(year, doj, now()) as year_of_exp from employee where name="Rashid Aftab";
+
+-- 
+Select dept, count(sid) from dept group by dept;
+
+--
+select Address, count(*) from employee group by Address order by Address desc;
+
+--
+select dept , max(salary) from dept group by dept;
+
+--
+select dept, count(sid) from dept where bonus > 5000 group by dept;
+
+--
+select dept, count(sid) from dept where bonus > 5000 group by dept having count(dept)>=2;
+
+--
+select dept, count(sid) from dept where bonus > 5000 group by dept having dept="dev";
+
+--
+select count(sid) from dept where bonus > 8000;
+
+--
+select sum(bonus) from dept where dept = "dev";
+
